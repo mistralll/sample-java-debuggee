@@ -4,15 +4,24 @@ cmp:
 	javac */*.java
 	javac *.java
 
-run: 
+exec: 
 	java main
 
 clean:	
 	rm -f */*.class
 	rm -f *.class
 
-r: 
+debug: 
+	java -agentlib:jdwp=transport=dt_socket,server=y,address=5005 main
+
+run: 
 	make clean
 	make cmp
 	make run
+	make clean
+
+db: 
+	make clean
+	make cmp
+	make debug
 	make clean
